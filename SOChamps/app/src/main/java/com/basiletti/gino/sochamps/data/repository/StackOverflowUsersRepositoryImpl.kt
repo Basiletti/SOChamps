@@ -12,9 +12,7 @@ class StackOverflowUsersRepositoryImpl @Inject constructor(
 ): StackOverflowUsersRepository {
 
     override suspend fun getTopUsers(): List<User> {
-        return api.getTopUsers().items.map {
-            mapper.convertDtoToPresentation(it)
-        }
+        return mapper.convertDtoToPresentation(api.getTopUsers().items)
     }
 
 }
