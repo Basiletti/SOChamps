@@ -21,6 +21,7 @@ import com.basiletti.gino.sochamps.domain.model.User
 import com.basiletti.gino.sochamps.presentation.components.SOEmptyState
 import com.basiletti.gino.sochamps.presentation.components.SOErrorBanner
 import com.basiletti.gino.sochamps.presentation.components.SOHeader
+import com.basiletti.gino.sochamps.presentation.components.SOSpinner
 
 @Composable
 fun UserListScreen(
@@ -46,20 +47,25 @@ fun UserListScreen(
             }
         }
 
-
-        if (uiState.users.isEmpty()) {
-            SOEmptyState(
-                text = stringResource(R.string.no_users_found),
-                iconRes = R.drawable.ic_user,
-                buttonText = stringResource(R.string.try_again),
-                onButtonClicked = viewModel::loadUsers
-            )
-
-        } else {
-            UserList(
-                users = uiState.users
-            )
+        when {
+            uiState.isLoading -> {
+                SOSpinner(text = stringResource(R.string.champions_loading_text))
+            }
+            uiState.users.isEmpty() -> {
+                SOEmptyState(
+                    text = stringResource(R.string.no_users_found),
+                    iconRes = R.drawable.ic_user,
+                    buttonText = stringResource(R.string.try_again),
+                    onButtonClicked = viewModel::loadUsers
+                )
+            }
+            else -> {
+                UserList(
+                    users = uiState.users
+                )
+            }
         }
+
     }
 }
 

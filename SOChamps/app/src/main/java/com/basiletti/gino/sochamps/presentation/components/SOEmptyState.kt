@@ -31,8 +31,10 @@ fun SOEmptyState(
     Column(horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
             .fillMaxSize()
-            .padding(20.dp),
-        verticalArrangement = Arrangement.Center
+            .padding(
+                horizontal = 20.dp,
+                vertical = 100.dp
+            ),
     ) {
         iconRes?.let { icon ->
             Icon(
