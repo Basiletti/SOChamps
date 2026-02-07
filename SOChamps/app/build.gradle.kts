@@ -64,6 +64,7 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.converter.moshi)
     implementation(libs.converter.gson)
+    implementation(libs.logging.interceptor)
 
     //Hilt
     kapt(libs.hilt.compiler)

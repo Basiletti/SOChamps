@@ -31,11 +31,11 @@ fun SOSpinner(
             ),
         verticalArrangement = Arrangement.spacedBy(spaceRegular)
     ) {
-        CircularProgressIndicator(
-            modifier = Modifier.width(iconLarge),
-            color = Color.White,
-            trackColor = Color.DarkGray
-        )
+//        CircularProgressIndicator(
+//            modifier = Modifier.width(iconLarge),
+//            color = Color.White,
+//            trackColor = Color.DarkGray
+//        )
 
         Text(
             textAlign = TextAlign.Center,
