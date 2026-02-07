@@ -12,8 +12,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.basiletti.gino.sochamps.ui.theme.iconLarge
+import com.basiletti.gino.sochamps.ui.theme.spaceRegular
+import com.basiletti.gino.sochamps.ui.theme.spaceXXXlarge
+import com.basiletti.gino.sochamps.ui.theme.textLarge
 
 @Composable
 fun SOSpinner(
@@ -24,13 +26,13 @@ fun SOSpinner(
         modifier = modifier
             .fillMaxSize()
             .padding(
-                horizontal = 20.dp,
-                vertical = 100.dp
+                horizontal = spaceRegular,
+                vertical = spaceXXXlarge
             ),
-        verticalArrangement = Arrangement.spacedBy(20.dp)
+        verticalArrangement = Arrangement.spacedBy(spaceRegular)
     ) {
         CircularProgressIndicator(
-            modifier = Modifier.width(50.dp),
+            modifier = Modifier.width(iconLarge),
             color = Color.White,
             trackColor = Color.DarkGray
         )
@@ -38,8 +40,8 @@ fun SOSpinner(
         Text(
             textAlign = TextAlign.Center,
             text = text,
-            fontSize = 24.sp,
-            modifier = Modifier.padding(20.dp)
+            fontSize = textLarge,
+            modifier = Modifier.padding(spaceRegular)
         )
 
 

@@ -19,7 +19,7 @@ class UserListViewModel @Inject constructor(
     fun loadUsers() {
         if (!uiState.value.isLoading) {
             viewModelScope.launch {
-                _uiState.value = _uiState.value.copy(isLoading = true)
+//                _uiState.value = _uiState.value.copy(isLoading = true)
 
 
             }

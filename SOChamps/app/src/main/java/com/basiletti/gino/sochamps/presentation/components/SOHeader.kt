@@ -13,8 +13,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.basiletti.gino.sochamps.ui.theme.iconRegular
+import com.basiletti.gino.sochamps.ui.theme.spaceLarge
+import com.basiletti.gino.sochamps.ui.theme.spaceRegular
+import com.basiletti.gino.sochamps.ui.theme.textLarge
 
 @Composable
 fun SOHeader(
@@ -29,19 +31,19 @@ fun SOHeader(
             modifier = modifier
                 .fillMaxWidth()
                 .padding(
-                    horizontal = 30.dp,
-                    vertical = 20.dp
+                    horizontal = spaceLarge,
+                    vertical = spaceRegular
                 )
         ) {
             Text(
                 text = headerText,
-                fontSize = 24.sp,
+                fontSize = textLarge,
                 modifier = Modifier.weight(1f)
             )
 
             iconEndRes?.let { icon ->
                 Icon(
-                    modifier = Modifier.size(40.dp),
+                    modifier = Modifier.size(iconRegular),
                     painter = painterResource(id = icon),
                     tint = Color.White,
                     contentDescription = contentDescription

@@ -6,7 +6,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
+import com.basiletti.gino.sochamps.ui.theme.spaceRegular
 
 @Composable
 fun SOErrorBanner(
@@ -16,7 +16,7 @@ fun SOErrorBanner(
     Text(
         modifier = modifier
             .background(Color.Red)
-            .padding(vertical = 20.dp),
+            .padding(vertical = spaceRegular),
         text = errorText
     )
 }

@@ -1,6 +1,5 @@
 package com.basiletti.gino.sochamps.presentation.components
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,8 +15,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.basiletti.gino.sochamps.ui.theme.iconXXXLarge
+import com.basiletti.gino.sochamps.ui.theme.spaceLarge
+import com.basiletti.gino.sochamps.ui.theme.spaceRegular
+import com.basiletti.gino.sochamps.ui.theme.spaceSmall
+import com.basiletti.gino.sochamps.ui.theme.spaceXXXlarge
+import com.basiletti.gino.sochamps.ui.theme.textLarge
+import com.basiletti.gino.sochamps.ui.theme.textRegular
 
 @Composable
 fun SOEmptyState(
@@ -32,13 +36,13 @@ fun SOEmptyState(
         modifier = modifier
             .fillMaxSize()
             .padding(
-                horizontal = 20.dp,
-                vertical = 100.dp
+                horizontal = spaceRegular,
+                vertical = spaceXXXlarge
             ),
     ) {
         iconRes?.let { icon ->
             Icon(
-                modifier = Modifier.size(120.dp),
+                modifier = Modifier.size(iconXXXLarge),
                 painter = painterResource(id = icon),
                 tint = Color.White,
                 contentDescription = contentDescription
@@ -48,12 +52,12 @@ fun SOEmptyState(
         Text(
             textAlign = TextAlign.Center,
             text = text,
-            fontSize = 24.sp,
-            modifier = Modifier.padding(20.dp)
+            fontSize = textLarge,
+            modifier = Modifier.padding(spaceRegular)
         )
 
         buttonText?.let { text ->
-            Spacer(Modifier.height(30.dp))
+            Spacer(Modifier.height(spaceLarge))
 
             Button(
                 onClick = {
@@ -62,11 +66,11 @@ fun SOEmptyState(
             ) {
                 Text(
                     text = text,
-                    fontSize = 20.sp,
+                    fontSize = textRegular,
                     modifier = Modifier
                         .padding(
-                            vertical = 10.dp,
-                            horizontal = 30.dp
+                            vertical = spaceSmall,
+                            horizontal = spaceLarge
                         )
                 )
             }
