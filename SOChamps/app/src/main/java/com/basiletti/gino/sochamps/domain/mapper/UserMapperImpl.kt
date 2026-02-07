@@ -9,7 +9,10 @@ class UserMapperImpl: UserMapper {
             id = userDto.user_id,
             name = userDto.display_name,
             profileImageURL = userDto.profile_image,
-            reputation = userDto.reputation
+            reputation = userDto.reputation,
+            bronzeBadges = userDto.badge_counts.bronze,
+            silverBadges = userDto.badge_counts.silver,
+            goldBadges = userDto.badge_counts.gold,
         )
     }
 }

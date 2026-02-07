@@ -29,6 +29,11 @@ class UserListViewModel @Inject constructor(
                     when (val result = getSOUsersUseCase.invoke()) {
                         is Resource.Success -> {
                             Log.d("ginodbg", "result = ${result.data?.size}")
+                            _uiState.value = _uiState.value.copy(
+                                users = result.data!!,
+                                isLoading = false,
+                                errorMessage = null,
+                            )
 
                         }
 

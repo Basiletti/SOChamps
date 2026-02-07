@@ -5,4 +5,7 @@ data class User(
     val name: String,
     val profileImageURL: String,
     val reputation: Int,
+    val bronzeBadges: Int,
+    val silverBadges: Int,
+    val goldBadges: Int,
 )
