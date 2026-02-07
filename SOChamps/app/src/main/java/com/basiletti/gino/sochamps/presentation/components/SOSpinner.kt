@@ -31,11 +31,12 @@ fun SOSpinner(
             ),
         verticalArrangement = Arrangement.spacedBy(spaceRegular)
     ) {
-//        CircularProgressIndicator(
-//            modifier = Modifier.width(iconLarge),
-//            color = Color.White,
-//            trackColor = Color.DarkGray
-//        )
+        //TODO: This seems to flood the console with logging / recompose a lot - but it is an animation...
+        CircularProgressIndicator(
+            modifier = Modifier.width(iconLarge),
+            color = Color.White,
+            trackColor = Color.DarkGray
+        )
 
         Text(
             textAlign = TextAlign.Center,

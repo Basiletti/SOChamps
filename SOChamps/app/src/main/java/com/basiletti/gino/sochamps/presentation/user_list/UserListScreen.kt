@@ -56,13 +56,15 @@ fun UserListScreen(
     ) {
         SOHeader(
             headerText = stringResource(R.string.stack_overflow_champs),
-            iconEndRes = R.drawable.ic_download
+            iconEndRes = R.drawable.ic_download,
+            onIconClicked = viewModel::loadUsers
         )
 
         AnimatedVisibility(uiState.errorMessage != null) {
-            uiState.errorMessage?.let { error ->
-                SOErrorBanner(errorText = error)
-            }
+            SOErrorBanner(
+                modifier = Modifier.fillMaxWidth(),
+                errorText = uiState.errorMessage ?: ""
+            )
         }
 
         when {
@@ -78,9 +80,7 @@ fun UserListScreen(
                 )
             }
             else -> {
-                UserList(
-                    users = uiState.users
-                )
+                UserList(users = uiState.users)
             }
         }
 
@@ -89,7 +89,6 @@ fun UserListScreen(
 
 @Composable
 fun UserList(
-    modifier: Modifier = Modifier,
     users: List<User>
 ) {
     LazyColumn(modifier = Modifier.fillMaxSize()) {

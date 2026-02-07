@@ -1,5 +1,6 @@
 package com.basiletti.gino.sochamps.presentation.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -16,14 +17,14 @@ import androidx.compose.ui.res.painterResource
 import com.basiletti.gino.sochamps.ui.theme.iconRegular
 import com.basiletti.gino.sochamps.ui.theme.spaceLarge
 import com.basiletti.gino.sochamps.ui.theme.spaceRegular
-import com.basiletti.gino.sochamps.ui.theme.textLarge
 
 @Composable
 fun SOHeader(
     modifier: Modifier = Modifier,
     headerText: String,
     iconEndRes: Int? = null,
-    contentDescription: String? = null
+    contentDescription: String? = null,
+    onIconClicked: () -> Unit,
 ) {
     Column {
         Row(
@@ -35,15 +36,13 @@ fun SOHeader(
                     vertical = spaceRegular
                 )
         ) {
-            Text(
-                text = headerText,
-                fontSize = textLarge,
-                modifier = Modifier.weight(1f)
-            )
+            SOTitle(text = headerText, modifier = Modifier.weight(1f))
 
             iconEndRes?.let { icon ->
                 Icon(
-                    modifier = Modifier.size(iconRegular),
+                    modifier = Modifier
+                        .size(iconRegular)
+                        .clickable { onIconClicked() },
                     painter = painterResource(id = icon),
                     tint = Color.White,
                     contentDescription = contentDescription

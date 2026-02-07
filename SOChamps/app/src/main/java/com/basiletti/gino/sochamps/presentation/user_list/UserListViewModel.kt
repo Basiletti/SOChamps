@@ -7,6 +7,7 @@ import com.basiletti.gino.sochamps.domain.usecases.GetSOUsersUseCase
 import com.basiletti.gino.sochamps.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -24,24 +25,29 @@ class UserListViewModel @Inject constructor(
         if (!uiState.value.isLoading) {
             viewModelScope.launch {
                 with(Dispatchers.IO) {
-                    _uiState.value = _uiState.value.copy(isLoading = true)
+                    _uiState.value = _uiState.value.copy(
+                        isLoading = true,
+                        errorMessage = null,
+                    )
+                    delay(1000) //Artificial network delay just to demonstrate loading state on UI.
 
                     when (val result = getSOUsersUseCase.invoke()) {
                         is Resource.Success -> {
-                            Log.d("ginodbg", "result = ${result.data?.size}")
                             _uiState.value = _uiState.value.copy(
                                 users = result.data!!,
                                 isLoading = false,
                                 errorMessage = null,
                             )
-
                         }
 
                         is Resource.Error -> {
-                            Log.d("ginodbg", "failure result = ${result.message}")
+                            _uiState.value = _uiState.value.copy(
+                                users = listOf(),
+                                isLoading = false,
+                                errorMessage = result.message,
+                            )
                         }
                     }
-
                 }
             }
         }
