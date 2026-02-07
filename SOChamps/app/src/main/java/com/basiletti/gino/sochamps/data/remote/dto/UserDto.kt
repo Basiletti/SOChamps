@@ -9,13 +9,13 @@ import com.google.gson.annotations.SerializedName
     us to have camelCased variable names rather than the snake_case used by the API.
  */
 
-data class User(
+data class UserDto(
     @SerializedName("accept_rate")
     val acceptRate: Int,
     @SerializedName("account_id")
     val accountId: Int,
     @SerializedName("badge_counts")
-    val badgeCounts: BadgeCounts,
+    val badgeCountsDto: BadgeCountsDto,
     @SerializedName("creation_date")
     val creationDate: Int,
     @SerializedName("display_name")
