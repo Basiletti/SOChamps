@@ -30,6 +30,7 @@ import com.basiletti.gino.sochamps.R
 import com.basiletti.gino.sochamps.domain.model.User
 import com.basiletti.gino.sochamps.presentation.components.AsyncImageLoader
 import com.basiletti.gino.sochamps.presentation.components.BadgeType
+import com.basiletti.gino.sochamps.presentation.components.SOAlertDialog
 import com.basiletti.gino.sochamps.presentation.components.SOBadge
 import com.basiletti.gino.sochamps.presentation.components.SOButton
 import com.basiletti.gino.sochamps.presentation.components.SOEmptyState
@@ -56,6 +57,29 @@ fun UserListScreen(
         viewModel.loadUsers()
     }
 
+    if (uiState.showUnfollowDialog) {
+        SOAlertDialog(
+            onConfirmation = viewModel::onUnfollowConfirmed,
+            onDismissRequest = viewModel::hideDialog,
+            dialogTitle = stringResource(R.string.unfollow_user),
+            dialogText = stringResource(
+                R.string.are_you_sure_you_wish_to_unfollow,
+                uiState.focusedUser?.name ?: ""
+            )
+        )
+    }
+
+    UserListContent(
+        viewModel = viewModel,
+        uiState = uiState,
+    )
+}
+
+@Composable
+fun UserListContent(
+    viewModel: UserListViewModel,
+    uiState: UserListUiState,
+) {
     Column(modifier = Modifier
         .fillMaxSize()
     ) {

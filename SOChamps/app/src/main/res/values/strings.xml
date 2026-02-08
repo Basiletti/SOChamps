@@ -6,4 +6,8 @@
     <string name="champions_loading_text">The champions are on their way...</string>
     <string name="following">Following</string>
     <string name="follow">Follow</string>
+    <string name="confirm_caps">CONFIRM</string>
+    <string name="cancel_caps">CANCEL</string>
+    <string name="unfollow_user">Unfollow User</string>
+    <string name="are_you_sure_you_wish_to_unfollow">Are you sure you wish to unfollow %1$s?</string>
 </resources>

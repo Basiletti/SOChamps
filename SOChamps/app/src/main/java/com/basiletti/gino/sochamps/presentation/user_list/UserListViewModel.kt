@@ -1,10 +1,8 @@
 package com.basiletti.gino.sochamps.presentation.user_list
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.basiletti.gino.sochamps.domain.model.User
-import com.basiletti.gino.sochamps.domain.usecases.GetFollowingListUseCase
 import com.basiletti.gino.sochamps.domain.usecases.GetSOUsersUseCase
 import com.basiletti.gino.sochamps.domain.usecases.UpdateFollowUseCase
 import com.basiletti.gino.sochamps.util.Resource
@@ -58,7 +56,37 @@ class UserListViewModel @Inject constructor(
         }
     }
 
+    fun hideDialog() {
+        _uiState.value = _uiState.value.copy(
+            showUnfollowDialog = false,
+            focusedUser = null,
+        )
+    }
+
+    fun onUnfollowConfirmed() {
+        _uiState.value.focusedUser?.let { user ->
+            toggleUserFollow(user)
+        }
+
+        _uiState.value = _uiState.value.copy(
+            showUnfollowDialog = false,
+            focusedUser = null
+        )
+    }
+
     fun onFollowClicked(user: User) {
+        if (user.isFollowing == true) {
+            _uiState.value = _uiState.value.copy(
+                showUnfollowDialog = true,
+                focusedUser = user,
+            )
+
+        } else {
+            toggleUserFollow(user)
+        }
+    }
+
+    fun toggleUserFollow(user: User) {
         viewModelScope.launch {
             val updatedUser = withContext(Dispatchers.IO) {
                 updateFollowUseCase.invoke(user)
