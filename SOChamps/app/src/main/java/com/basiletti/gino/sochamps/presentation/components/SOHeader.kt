@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import com.basiletti.gino.sochamps.ui.theme.iconRegular
 import com.basiletti.gino.sochamps.ui.theme.spaceLarge
@@ -23,7 +24,7 @@ fun SOHeader(
     headerText: String,
     iconEndRes: Int? = null,
     contentDescription: String? = null,
-    onIconClicked: () -> Unit,
+    onIconClicked: () -> Unit = {},
 ) {
     Column {
         Row(
@@ -41,7 +42,8 @@ fun SOHeader(
                 Icon(
                     modifier = Modifier
                         .size(iconRegular)
-                        .clickable { onIconClicked() },
+                        .clickable { onIconClicked() }
+                        .testTag("iconEnd"),
                     painter = painterResource(id = icon),
                     tint = Color.White,
                     contentDescription = contentDescription

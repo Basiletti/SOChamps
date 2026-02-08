@@ -17,6 +17,5 @@ fun SOErrorBanner(
             .background(Color.Red)
             .padding(spaceRegular),
         text = errorText,
-
     )
 }

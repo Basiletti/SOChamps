@@ -13,11 +13,22 @@ android {
     defaultConfig {
         applicationId = "com.basiletti.gino.sochamps"
         minSdk = 24
-        targetSdk = 36
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        testOptions {
+            unitTests.all {
+                it.useJUnitPlatform()
+                it.useJUnit()
+            }
+
+            unitTests {
+                isIncludeAndroidResources = true
+            }
+        }
     }
 
     buildTypes {
@@ -83,6 +94,9 @@ dependencies {
     testImplementation(libs.mockwebserver)
     testImplementation(libs.truth)
     testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.robolectric)
+    testImplementation(libs.androidx.ui.test.junit4.android)
+
 
 
 }
