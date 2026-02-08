@@ -9,13 +9,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -23,7 +20,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.basiletti.gino.sochamps.R
@@ -32,7 +28,6 @@ import com.basiletti.gino.sochamps.presentation.components.AsyncImageLoader
 import com.basiletti.gino.sochamps.presentation.components.BadgeType
 import com.basiletti.gino.sochamps.presentation.components.SOAlertDialog
 import com.basiletti.gino.sochamps.presentation.components.SOBadge
-import com.basiletti.gino.sochamps.presentation.components.SOButton
 import com.basiletti.gino.sochamps.presentation.components.SOEmptyState
 import com.basiletti.gino.sochamps.presentation.components.SOErrorBanner
 import com.basiletti.gino.sochamps.presentation.components.SOHeader
@@ -41,11 +36,9 @@ import com.basiletti.gino.sochamps.presentation.components.SOSpinner
 import com.basiletti.gino.sochamps.presentation.components.SOSubtitle
 import com.basiletti.gino.sochamps.presentation.components.SOTitle
 import com.basiletti.gino.sochamps.ui.theme.darkGreen
-import com.basiletti.gino.sochamps.ui.theme.iconXXXLarge
 import com.basiletti.gino.sochamps.ui.theme.spaceRegular
 import com.basiletti.gino.sochamps.ui.theme.spaceSmall
 import com.basiletti.gino.sochamps.ui.theme.spaceXSmall
-import com.basiletti.gino.sochamps.ui.theme.spaceXXSmall
 
 @Composable
 fun UserListScreen(

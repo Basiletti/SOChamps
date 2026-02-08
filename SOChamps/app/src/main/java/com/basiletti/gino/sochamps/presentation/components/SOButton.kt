@@ -8,7 +8,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.basiletti.gino.sochamps.ui.theme.spaceLarge
 import com.basiletti.gino.sochamps.ui.theme.spaceSmall
-import com.basiletti.gino.sochamps.ui.theme.spaceXXSmall
 
 @Composable
 fun SOButton(

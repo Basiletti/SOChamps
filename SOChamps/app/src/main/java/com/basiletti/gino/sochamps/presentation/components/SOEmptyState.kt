@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,10 +17,8 @@ import androidx.compose.ui.text.style.TextAlign
 import com.basiletti.gino.sochamps.ui.theme.iconXXXLarge
 import com.basiletti.gino.sochamps.ui.theme.spaceLarge
 import com.basiletti.gino.sochamps.ui.theme.spaceRegular
-import com.basiletti.gino.sochamps.ui.theme.spaceSmall
 import com.basiletti.gino.sochamps.ui.theme.spaceXXXlarge
 import com.basiletti.gino.sochamps.ui.theme.textLarge
-import com.basiletti.gino.sochamps.ui.theme.textRegular
 
 @Composable
 fun SOEmptyState(
