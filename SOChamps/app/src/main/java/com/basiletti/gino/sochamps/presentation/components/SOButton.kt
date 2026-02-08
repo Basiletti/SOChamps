@@ -51,10 +51,6 @@ fun SOMiniButton(
         SODescription(
             text = text,
             modifier = modifier
-                .padding(
-                    vertical = spaceXXSmall,
-                    horizontal = spaceSmall
-                )
         )
     }
 }

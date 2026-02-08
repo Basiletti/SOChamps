@@ -4,4 +4,6 @@
     <string name="no_users_found">No users found. This may happen if you or the server are offline.</string>
     <string name="try_again">Try Again</string>
     <string name="champions_loading_text">The champions are on their way...</string>
+    <string name="following">Following</string>
+    <string name="follow">Follow</string>
 </resources>

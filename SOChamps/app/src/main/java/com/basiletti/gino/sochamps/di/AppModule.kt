@@ -1,6 +1,10 @@
 package com.basiletti.gino.sochamps.di
 
+import android.app.Application
+import androidx.room.Room
 import com.basiletti.gino.sochamps.common.Constants.BASE_URL
+import com.basiletti.gino.sochamps.data.local.FollowingDao
+import com.basiletti.gino.sochamps.data.local.SODatabase
 import com.basiletti.gino.sochamps.data.remote.StackOverflowApi
 import com.basiletti.gino.sochamps.data.repository.StackOverflowUsersRepositoryImpl
 import com.basiletti.gino.sochamps.domain.mapper.UserMapper
@@ -48,16 +52,25 @@ object AppModule {
         return UserMapperImpl()
     }
 
+    @Provides
+    @Singleton
+    fun provideSODatabase(app: Application): SODatabase {
+        return Room.databaseBuilder(app, SODatabase::class.java, "stackoverflow.db")
+            .build()
+    }
+
 
     @Provides
     @Singleton
     fun provideStackOverflowUsersRepository(
         api: StackOverflowApi,
         mapper: UserMapper,
+        db: SODatabase,
     ): StackOverflowUsersRepository {
         return StackOverflowUsersRepositoryImpl(
             api = api,
-            mapper = mapper
+            mapper = mapper,
+            dao = db.followingDao(),
         )
     }
 

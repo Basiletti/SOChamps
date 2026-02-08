@@ -39,6 +39,7 @@ import com.basiletti.gino.sochamps.presentation.components.SOMiniButton
 import com.basiletti.gino.sochamps.presentation.components.SOSpinner
 import com.basiletti.gino.sochamps.presentation.components.SOSubtitle
 import com.basiletti.gino.sochamps.presentation.components.SOTitle
+import com.basiletti.gino.sochamps.ui.theme.darkGreen
 import com.basiletti.gino.sochamps.ui.theme.iconXXXLarge
 import com.basiletti.gino.sochamps.ui.theme.spaceRegular
 import com.basiletti.gino.sochamps.ui.theme.spaceSmall
@@ -84,7 +85,10 @@ fun UserListScreen(
                 )
             }
             else -> {
-                UserList(users = uiState.users)
+                UserList(
+                    users = uiState.users,
+                    onFollowClicked = viewModel::onFollowClicked
+                )
             }
         }
 
@@ -93,12 +97,16 @@ fun UserListScreen(
 
 @Composable
 fun UserList(
-    users: List<User>
+    users: List<User>,
+    onFollowClicked: (User) -> Unit,
 ) {
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         itemsIndexed(users) { index, user ->
             Column {
-                UserInformation(user = user)
+                UserInformation(
+                    user = user,
+                    onFollowClicked = onFollowClicked
+                )
                 HorizontalDivider()
             }
         }
@@ -108,6 +116,7 @@ fun UserList(
 @Composable
 fun UserInformation(
     user: User,
+    onFollowClicked: (User) -> Unit,
 ) {
     Row(verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
@@ -123,12 +132,16 @@ fun UserInformation(
         ) {
             AsyncImageLoader(imageUrl = user.profileImageURL)
 
+            val buttonTextRes = if (user.isFollowing == true) R.string.following else R.string.follow
+            val buttonColor = if (user.isFollowing == true) darkGreen else Color.DarkGray
             SOMiniButton(
-                text = "Follow",
-                onButtonClicked = {}
+                text = stringResource(buttonTextRes),
+                backgroundColor = buttonColor,
+                onButtonClicked = {
+                    onFollowClicked(user)
+                }
             )
         }
-
 
         Column(horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.fillMaxWidth(),

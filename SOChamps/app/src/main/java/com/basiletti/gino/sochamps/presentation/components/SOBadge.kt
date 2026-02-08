@@ -11,7 +11,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import com.basiletti.gino.sochamps.R
+import com.basiletti.gino.sochamps.ui.theme.bronze
+import com.basiletti.gino.sochamps.ui.theme.gold
 import com.basiletti.gino.sochamps.ui.theme.iconSmall
+import com.basiletti.gino.sochamps.ui.theme.silver
 import com.basiletti.gino.sochamps.ui.theme.spaceXSmall
 import com.basiletti.gino.sochamps.ui.theme.spaceXXSmall
 
@@ -38,9 +41,9 @@ fun SOBadge(
 
 private fun getBadgeColour(badgeType: BadgeType): Color {
     return when (badgeType) {
-        BadgeType.BRONZE -> Color(color = 0xFFce8946)
-        BadgeType.SILVER -> Color(color = 0xFFc0c0c0)
-        BadgeType.GOLD -> Color(color = 0xFFd3af37)
+        BadgeType.BRONZE -> bronze
+        BadgeType.SILVER -> silver
+        BadgeType.GOLD -> gold
     }
 }
 
