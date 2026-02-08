@@ -3,7 +3,7 @@ package com.basiletti.gino.sochamps.data.remote.dto
 data class UserDto(
     val accept_rate: Int,
     val account_id: Int,
-    val badge_counts: BadgeCounts,
+    val badge_counts: BadgeCountsDto,
     val creation_date: Int,
     val display_name: String,
     val is_employee: Boolean,

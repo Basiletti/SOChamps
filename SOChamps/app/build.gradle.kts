@@ -79,4 +79,10 @@ dependencies {
     //Image loading
     implementation(libs.coil.kt.coil.compose)
 
+    //Testing
+    testImplementation(libs.mockwebserver)
+    testImplementation(libs.truth)
+    testImplementation(libs.kotlinx.coroutines.test)
+
+
 }
