@@ -59,21 +59,11 @@ fun SOEmptyState(
         buttonText?.let { text ->
             Spacer(Modifier.height(spaceLarge))
 
-            Button(
-                onClick = {
-                    onButtonClicked()
-                }
-            ) {
-                Text(
-                    text = text,
-                    fontSize = textRegular,
-                    modifier = Modifier
-                        .padding(
-                            vertical = spaceSmall,
-                            horizontal = spaceLarge
-                        )
-                )
-            }
+            SOButton(
+                text = text,
+                onButtonClicked = onButtonClicked,
+
+            )
         }
 
 

@@ -28,11 +28,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.basiletti.gino.sochamps.R
 import com.basiletti.gino.sochamps.domain.model.User
+import com.basiletti.gino.sochamps.presentation.components.AsyncImageLoader
 import com.basiletti.gino.sochamps.presentation.components.BadgeType
 import com.basiletti.gino.sochamps.presentation.components.SOBadge
+import com.basiletti.gino.sochamps.presentation.components.SOButton
 import com.basiletti.gino.sochamps.presentation.components.SOEmptyState
 import com.basiletti.gino.sochamps.presentation.components.SOErrorBanner
 import com.basiletti.gino.sochamps.presentation.components.SOHeader
+import com.basiletti.gino.sochamps.presentation.components.SOMiniButton
 import com.basiletti.gino.sochamps.presentation.components.SOSpinner
 import com.basiletti.gino.sochamps.presentation.components.SOSubtitle
 import com.basiletti.gino.sochamps.presentation.components.SOTitle
@@ -40,6 +43,7 @@ import com.basiletti.gino.sochamps.ui.theme.iconXXXLarge
 import com.basiletti.gino.sochamps.ui.theme.spaceRegular
 import com.basiletti.gino.sochamps.ui.theme.spaceSmall
 import com.basiletti.gino.sochamps.ui.theme.spaceXSmall
+import com.basiletti.gino.sochamps.ui.theme.spaceXXSmall
 
 @Composable
 fun UserListScreen(
@@ -107,15 +111,24 @@ fun UserInformation(
 ) {
     Row(verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
-            .padding(spaceRegular)
+            .padding(
+                horizontal = spaceRegular,
+                vertical = spaceSmall
+            )
             .fillMaxWidth(),
     ) {
-        Icon(
-            modifier = Modifier.size(iconXXXLarge),
-            painter = painterResource(id = R.drawable.ic_user),
-            tint = Color.White,
-            contentDescription = null
-        )
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(spaceSmall)
+        ) {
+            AsyncImageLoader(imageUrl = user.profileImageURL)
+
+            SOMiniButton(
+                text = "Follow",
+                onButtonClicked = {}
+            )
+        }
+
 
         Column(horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.fillMaxWidth(),
@@ -130,7 +143,7 @@ fun UserInformation(
                 text = "Reputation: ${user.reputation}"
             )
 
-            Row() {
+            Row {
                 SOBadge(text = user.bronzeBadges.toString(), badgeType = BadgeType.BRONZE)
                 SOBadge(text = user.silverBadges.toString(), badgeType = BadgeType.SILVER)
                 SOBadge(text = user.goldBadges.toString(), badgeType = BadgeType.GOLD)
