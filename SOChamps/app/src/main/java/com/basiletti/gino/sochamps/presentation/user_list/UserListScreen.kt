@@ -20,6 +20,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.basiletti.gino.sochamps.R
@@ -77,6 +78,7 @@ fun UserListContent(
         .fillMaxSize()
     ) {
         SOHeader(
+            modifier = Modifier.testTag("SOHeader"),
             headerText = stringResource(R.string.stack_overflow_champs),
             iconEndRes = R.drawable.ic_download,
             onIconClicked = viewModel::loadUsers
@@ -84,17 +86,21 @@ fun UserListContent(
 
         AnimatedVisibility(uiState.errorMessage != null) {
             SOErrorBanner(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth().testTag("errorBanner"),
                 errorText = uiState.errorMessage ?: ""
             )
         }
 
         when {
             uiState.isLoading -> {
-                SOSpinner(text = stringResource(R.string.champions_loading_text))
+                SOSpinner(
+                    modifier = Modifier.testTag("loadingSpinner"),
+                    text = stringResource(R.string.champions_loading_text)
+                )
             }
             uiState.users.isEmpty() -> {
                 SOEmptyState(
+                    modifier = Modifier.testTag("emptyState"),
                     text = stringResource(R.string.no_users_found),
                     iconRes = R.drawable.ic_user,
                     buttonText = stringResource(R.string.try_again),
@@ -117,7 +123,7 @@ fun UserList(
     users: List<User>,
     onFollowClicked: (User) -> Unit,
 ) {
-    LazyColumn(modifier = Modifier.fillMaxSize()) {
+    LazyColumn(modifier = Modifier.fillMaxSize().testTag("userList")) {
         itemsIndexed(users) { index, user ->
             Column {
                 UserInformation(

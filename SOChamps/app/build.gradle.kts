@@ -96,7 +96,7 @@ dependencies {
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.robolectric)
     testImplementation(libs.androidx.ui.test.junit4.android)
-
+    testImplementation(libs.mockito.kotlin)
 
 
 }

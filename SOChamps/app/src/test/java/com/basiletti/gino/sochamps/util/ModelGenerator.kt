@@ -2,6 +2,19 @@ package com.basiletti.gino.sochamps.util
 
 import com.basiletti.gino.sochamps.data.remote.dto.BadgeCountsDto
 import com.basiletti.gino.sochamps.data.remote.dto.UserDto
+import com.basiletti.gino.sochamps.domain.model.User
+
+fun generateUserPresentationModel(displayName: String): User {
+    return User(
+        id = 22656,
+        name = displayName,
+        profileImageURL = "",
+        reputation = 131072,
+        bronzeBadges = 100,
+        silverBadges = 80,
+        goldBadges = 50,
+    )
+}
 
 fun generateUserDtoModel(
     displayName: String = "Jon Skeet",
