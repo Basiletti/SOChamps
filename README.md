@@ -32,3 +32,22 @@ To further aid this approach, the package structure closely aligns to the 3 afor
 
 Another thing to note with the implementation is that from the start, where composables were going to be reused (titles, icons, etc.), I broke these down into 'component' files; which are all kept under the components package. This just keeps things really tidy, improves the testability of the components seen on the screens themselves, and enables us to not repeat more code than necessary. In my other personal projects, these components are often moved to their own 'ui-widgets' module; which gives us the benefits of app modularisation too - I didn't feel like it was necessary to modularise them in this mini-project though.
 
+## Testing
+
+Test coverage has been provided for as much of the classes as possible within these layers.
+
+-[TODO: add some test coverage for data!]
+
+-For the domain layer, the mapping function was tested to thoroughly ensure that the DTO classes were translated into our local model as we would expect them to be. This mapping would handle the very simple stripping down of the DTO model to just provide what we need on the presentation layer.
+
+-The majority of the testing done was on the presentation layer. The viewModel was fully tested (arguably the most important area, where UI state should always reflect what we believe should be happening at various stages), and the composables were quite thoroughly tested using the composeRule. I tested the VM and the main screen, but also tested a few of the component composables. I didn't test every single component for the purposes of this technical test, but I covered a few just to show the general approach I would take with writing test coverage for small components. There ended up being 9 component files, but most of which were just really basic texts/buttons, so I left a few of those out for testing and focused on the slightly more complex ones.
+
+## Future Improvements / Known Issues
+
+-I could have added test coverage for the repository / database area of the app, but decided against it to focus more on the other, more meaty classes and areas of the app. The DAO/database classes are extremely simple, and to write test coverage for them would have just mostly involved mocking what I would want them to return and verifying that they did that. There may have been more value in writing tests that verify that a row isn't inserted twice, a row is deleted when somebody is unfollowed etc. though; so I do acknowledge that this could have been more comprehensively tested.
+
+-Implementation wise, I am pleased with how the app is behaving. The only thing I am aware of that feels a bit off / improper, is the error banner is just fully displaying the error message returned from the API. This would obviously not mean an awful lot to an end-user (seeing something like a socket/timeout exception error message), and they would understand something more along the lines of 'Failed to reach server - you are offline'. A better/future implementation could have just been to have an errorCode: INT returned rather than an errorMessage, and then we could have the app translate that error code into some error message that we define ourselves - this would give us much better control over what error gets shown to the end user, rather than blurting out whatever the server sends us.
+
+-I ran into some issues when making the DTO models. The end result is only a very small inconsistency, but I wanted to note it: the models are using snake_case in their variable names, rather than our usual camelCase approach. I had attempted to prepend every variable in the DTO model with @SerializedName("the_api_variable_name"), but for some reason was encountering some error where it was failing to map the response to the DTO model.
+
+-As mentioned, I may have modularised certain parts of the app if I was spending longer on it. In my other personal project I have a :ui-widgets module and a :persistence module; where the composable components and roomDB/database implementation would both belong in their separate modules. Aside from feeling cleaner/more separated, this obviously helps with compilation / the separation of strings files etc. in larger scale apps. For an app with one screen and one small table in a database, this didn't feel necessary right now.
