@@ -34,9 +34,7 @@ Another thing to note with the implementation is that from the start, where comp
 
 ## Testing
 
-Test coverage has been provided for as much of the classes as possible within these layers.
-
--[TODO: add some test coverage for data!]
+Test coverage has been provided for as much of the classes as possible within these layers - with the exception of the data layer.
 
 -For the domain layer, the mapping function was tested to thoroughly ensure that the DTO classes were translated into our local model as we would expect them to be. This mapping would handle the very simple stripping down of the DTO model to just provide what we need on the presentation layer.
 
@@ -45,6 +43,8 @@ Test coverage has been provided for as much of the classes as possible within th
 ## Future Improvements / Known Issues
 
 -I could have added test coverage for the repository / database area of the app, but decided against it to focus more on the other, more meaty classes and areas of the app. The DAO/database classes are extremely simple, and to write test coverage for them would have just mostly involved mocking what I would want them to return and verifying that they did that. There may have been more value in writing tests that verify that a row isn't inserted twice, a row is deleted when somebody is unfollowed etc. though; so I do acknowledge that this could have been more comprehensively tested.
+
+-Furthermore, I could have written tests for the useCases. I feel like there would have been value in adding test coverage for the GetSOUsersUseCase in particular; as this attaches a Resource.Success/Error to the handled data, which would be very handy/meaningful to verify against when good or bad data is dealt with.
 
 -Implementation wise, I am pleased with how the app is behaving. The only thing I am aware of that feels a bit off / improper, is the error banner is just fully displaying the error message returned from the API. This would obviously not mean an awful lot to an end-user (seeing something like a socket/timeout exception error message), and they would understand something more along the lines of 'Failed to reach server - you are offline'. A better/future implementation could have just been to have an errorCode: INT returned rather than an errorMessage, and then we could have the app translate that error code into some error message that we define ourselves - this would give us much better control over what error gets shown to the end user, rather than blurting out whatever the server sends us.
 
