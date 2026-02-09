@@ -74,7 +74,7 @@ class UserListViewModel @Inject constructor(
     }
 
     fun onFollowButtonClicked(user: User) {
-        if (user.isFollowing == true) {
+        if (user.isFollowing) {
             _uiState.value = _uiState.value.copy(
                 showUnfollowDialog = true,
                 focusedUser = user,

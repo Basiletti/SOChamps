@@ -104,6 +104,40 @@ class UserListViewModelTest {
     }
 
     @Test
+    fun userListViewModelLoadUsers_whenErrorThenTryAgainThenUiStateAsExpected() {
+        runTest(testDispatcher) {
+            whenever(mockGetSOUsersUseCase.invoke()).thenReturn(Resource.Error(message = "Something went wrong"))
+
+            sut.uiState.test {
+                val initialState = awaitItem()
+                assertEquals(0, initialState.users.size)
+                assertEquals(false, initialState.isLoading)
+                assertEquals(null, initialState.errorMessage)
+
+                sut.loadUsers()
+                val secondState = awaitItem()
+                assertEquals(0, secondState.users.size)
+                assertEquals(true, secondState.isLoading)
+                assertEquals(null, secondState.errorMessage)
+
+                //Our initial error banner being shown
+                val thirdState = awaitItem()
+                assertEquals(false, thirdState.isLoading)
+                assertEquals(0, thirdState.users.size)
+                assertEquals("Something went wrong", thirdState.errorMessage)
+
+                sut.loadUsers()
+                val fourthState = awaitItem()
+                assertEquals(true, fourthState.isLoading)
+
+                //Error message back to null - The importance of this is it shows the animated hiding/showing of the banner.
+                //This makes it unambiguous to the user that the call has failed twice and they're not just seeing the original error banner.
+                assertEquals(null, fourthState.errorMessage)
+            }
+        }
+    }
+
+    @Test
     fun userListViewModel_whenFollowClickedThenUiStateAsExpected() {
         val userToBeFollowed = generateUserPresentationModel(displayName = "Ben")
 
@@ -136,7 +170,7 @@ class UserListViewModelTest {
                 assertEquals(3, loadedState.users.size)
                 assertEquals(false, loadedState.showUnfollowDialog)
                 assertEquals(null, loadedState.focusedUser)
-                assertEquals(null, loadedState.users[1].isFollowing)
+                assertEquals(false, loadedState.users[1].isFollowing)
 
                 sut.onFollowButtonClicked(user = userToBeFollowed)
                 val finalState = awaitItem()
@@ -158,6 +192,9 @@ class UserListViewModelTest {
                 followedUser, //This is the user we'll be unfollowing
                 generateUserPresentationModel(displayName = "Charlie"),
             )))
+            whenever(mockUpdateFollowUseCase.invoke(followedUser)).thenReturn(
+                generateUserPresentationModel(displayName = "Ben", isFollowing = false)
+            )
 
             sut.uiState.test {
                 val initialState = awaitItem()
@@ -173,17 +210,81 @@ class UserListViewModelTest {
                 assertEquals(false, secondState.showUnfollowDialog)
                 assertEquals(null, secondState.focusedUser)
 
-                val loadedState = awaitItem()
-                assertEquals(false, loadedState.isLoading)
-                assertEquals(3, loadedState.users.size)
-                assertEquals(false, loadedState.showUnfollowDialog)
-                assertEquals(null, loadedState.focusedUser)
+                val thirdState = awaitItem()
+                assertEquals(false, thirdState.isLoading)
+                assertEquals(3, thirdState.users.size)
+                assertEquals(false, thirdState.showUnfollowDialog)
+                assertEquals(null, thirdState.focusedUser)
+                assertEquals(true, thirdState.users[1].isFollowing)
+
 
                 sut.onFollowButtonClicked(user = followedUser)
-                val finalState = awaitItem()
+                val fourthState = awaitItem()
+                assertEquals(3, fourthState.users.size)
+                assertEquals(true, fourthState.showUnfollowDialog)
+                assertEquals(followedUser, fourthState.focusedUser)
+                assertEquals(true, fourthState.users[1].isFollowing)
+
+                sut.onUnfollowConfirmed()
+                awaitItem() //First await here is to unfollow the user
+                val finalState = awaitItem() //Second await is to hide the dialog/update focused user state
                 assertEquals(3, finalState.users.size)
-                assertEquals(true, finalState.showUnfollowDialog)
-                assertEquals(followedUser, finalState.focusedUser)
+                assertEquals(false, finalState.showUnfollowDialog)
+                assertEquals(null, finalState.focusedUser)
+                assertEquals(false, finalState.users[1].isFollowing)
+            }
+        }
+    }
+
+    @Test
+    fun userListViewModel_whenUnfollowDialogCancelledThenUiStateAsExpected() {
+        val followedUser = generateUserPresentationModel(displayName = "Ben", isFollowing = true)
+
+        runTest(testDispatcher) {
+            whenever(mockGetSOUsersUseCase.invoke()).thenReturn(Resource.Success(listOf(
+                generateUserPresentationModel(displayName = "Alfie"),
+                followedUser, //This is the user we'll be unfollowing
+                generateUserPresentationModel(displayName = "Charlie"),
+            )))
+            whenever(mockUpdateFollowUseCase.invoke(followedUser)).thenReturn(
+                generateUserPresentationModel(displayName = "Ben", isFollowing = false)
+            )
+
+            sut.uiState.test {
+                val initialState = awaitItem()
+                assertEquals(0, initialState.users.size)
+                assertEquals(false, initialState.isLoading)
+                assertEquals(false, initialState.showUnfollowDialog)
+                assertEquals(null, initialState.focusedUser)
+
+                sut.loadUsers()
+                val secondState = awaitItem()
+                assertEquals(0, secondState.users.size)
+                assertEquals(true, secondState.isLoading)
+                assertEquals(false, secondState.showUnfollowDialog)
+                assertEquals(null, secondState.focusedUser)
+
+                val thirdState = awaitItem()
+                assertEquals(false, thirdState.isLoading)
+                assertEquals(3, thirdState.users.size)
+                assertEquals(false, thirdState.showUnfollowDialog)
+                assertEquals(null, thirdState.focusedUser)
+                assertEquals(true, thirdState.users[1].isFollowing)
+
+
+                sut.onFollowButtonClicked(user = followedUser)
+                val fourthState = awaitItem()
+                assertEquals(3, fourthState.users.size)
+                assertEquals(true, fourthState.showUnfollowDialog)
+                assertEquals(followedUser, fourthState.focusedUser)
+                assertEquals(true, fourthState.users[1].isFollowing)
+
+                sut.hideDialog()
+                val finalState = awaitItem() //simulating 'clicking off' the dialog (or clicking cancel)
+                assertEquals(3, finalState.users.size)
+                assertEquals(false, finalState.showUnfollowDialog)
+                assertEquals(null, finalState.focusedUser)
+                assertEquals(true, finalState.users[1].isFollowing) //Still followed
             }
         }
     }

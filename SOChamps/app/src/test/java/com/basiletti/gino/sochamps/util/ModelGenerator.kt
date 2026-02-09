@@ -6,7 +6,7 @@ import com.basiletti.gino.sochamps.domain.model.User
 
 fun generateUserPresentationModel(
     displayName: String,
-    isFollowing: Boolean? = null,
+    isFollowing: Boolean = false,
 ): User {
     return User(
         id = 22656,

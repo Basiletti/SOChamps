@@ -10,7 +10,7 @@ class UpdateFollowUseCase @Inject constructor(
     suspend operator fun invoke(
         user: User
     ): User {
-        return if (user.isFollowing == true) {
+        return if (user.isFollowing) {
             repository.deleteFollow(user.id)
             user.copy(isFollowing = false)
 

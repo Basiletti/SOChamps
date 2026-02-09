@@ -8,5 +8,5 @@ data class User(
     val bronzeBadges: Int,
     val silverBadges: Int,
     val goldBadges: Int,
-    var isFollowing: Boolean? = null,
+    var isFollowing: Boolean = false,
 )
