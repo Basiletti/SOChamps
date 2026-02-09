@@ -1,5 +1,6 @@
 package com.basiletti.gino.sochamps.presentation.components
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -42,7 +43,7 @@ fun SOEmptyState(
             Icon(
                 modifier = Modifier.size(iconXXXLarge).testTag("emptyStateIcon"),
                 painter = painterResource(id = icon),
-                tint = Color.White,
+                tint = if (isSystemInDarkTheme()) Color.White else Color.Black,
                 contentDescription = contentDescription
             )
         }

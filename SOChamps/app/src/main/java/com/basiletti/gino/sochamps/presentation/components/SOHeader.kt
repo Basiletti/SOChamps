@@ -1,6 +1,7 @@
 package com.basiletti.gino.sochamps.presentation.components
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -45,7 +46,7 @@ fun SOHeader(
                         .clickable { onIconClicked() }
                         .testTag("iconEnd"),
                     painter = painterResource(id = icon),
-                    tint = Color.White,
+                    tint = if (isSystemInDarkTheme()) Color.White else Color.Black,
                     contentDescription = contentDescription
                 )
             }

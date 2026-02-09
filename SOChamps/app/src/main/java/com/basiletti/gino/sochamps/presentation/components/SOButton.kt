@@ -1,5 +1,6 @@
 package com.basiletti.gino.sochamps.presentation.components
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -24,6 +25,7 @@ fun SOButton(
     ) {
         SOSubtitle(
             text = text,
+            color = Color.White,
             modifier = modifier
                 .padding(
                     vertical = spaceSmall,
@@ -49,6 +51,7 @@ fun SOMiniButton(
     ) {
         SODescription(
             text = text,
+            color = Color.White,
             modifier = modifier
         )
     }
