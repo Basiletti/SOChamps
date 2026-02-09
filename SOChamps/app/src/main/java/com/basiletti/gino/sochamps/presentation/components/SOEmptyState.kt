@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import com.basiletti.gino.sochamps.ui.theme.iconXXXLarge
@@ -39,7 +40,7 @@ fun SOEmptyState(
     ) {
         iconRes?.let { icon ->
             Icon(
-                modifier = Modifier.size(iconXXXLarge),
+                modifier = Modifier.size(iconXXXLarge).testTag("emptyStateIcon"),
                 painter = painterResource(id = icon),
                 tint = Color.White,
                 contentDescription = contentDescription
@@ -50,16 +51,16 @@ fun SOEmptyState(
             textAlign = TextAlign.Center,
             text = text,
             fontSize = textLarge,
-            modifier = Modifier.padding(spaceRegular)
+            modifier = Modifier.padding(spaceRegular).testTag("emptyStateText")
         )
 
         buttonText?.let { text ->
             Spacer(Modifier.height(spaceLarge))
 
             SOButton(
+                modifier = Modifier.testTag("emptyStateButton"),
                 text = text,
                 onButtonClicked = onButtonClicked,
-
             )
         }
 
