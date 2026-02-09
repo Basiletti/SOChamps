@@ -42,7 +42,7 @@ Test coverage has been provided for as much of the classes as possible within th
 
 ## Future Improvements / Known Issues
 
--I could have added test coverage for the repository / database area of the app, but decided against it to focus more on the other, more meaty classes and areas of the app. The DAO/database classes are extremely simple, and to write test coverage for them would have just mostly involved mocking what I would want them to return and verifying that they did that. There may have been more value in writing tests that verify that a row isn't inserted twice, a row is deleted when somebody is unfollowed etc. though; so I do acknowledge that this could have been more comprehensively tested.
+-I could have added test coverage for the data layer of the app; namely around the repository / database parts, but decided against it to focus more on the other, more meaty classes and areas of the app. The DAO/database classes are extremely simple, and to write test coverage for them would have just mostly involved mocking what I would want them to return and verifying that they did that. There may have been more value in writing tests that verify that a row isn't inserted twice, a row is deleted when somebody is unfollowed etc. though; so I do acknowledge that this could have been more comprehensively tested.
 
 -Furthermore, I could have written tests for the useCases. I feel like there would have been value in adding test coverage for the GetSOUsersUseCase in particular; as this attaches a Resource.Success/Error to the handled data, which would be very handy/meaningful to verify against when good or bad data is dealt with.
 
