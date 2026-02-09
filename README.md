@@ -8,7 +8,8 @@ This app enables a user to see the top 20 contributors of StackOverflow. It load
 
 There is also a simulation of being able to follow/unfollow a user via the follow button beneath their profile image. The follow button reflects their followed state by text and colour; and clicking it to unfollow a user will display a warning dialog - much like we may see on social media apps like Twitter for example.
 
-<img width="424" height="945" alt="image" src="https://github.com/user-attachments/assets/4c1802f3-ee96-450d-88f0-96e15dbe217f" />
+<img width="424" height="945" alt="image" src="https://github.com/user-attachments/assets/4c1802f3-ee96-450d-88f0-96e15dbe217f" /> <img width="396" height="929" alt="image" src="https://github.com/user-attachments/assets/df7b73fe-5448-4dc0-a87c-913adf3398a4" />
+
 
 ## Implementation
 
