@@ -113,4 +113,29 @@ class UserListScreenTest {
         composeTestRule.onNodeWithTag("loadingSpinner").assertIsNotDisplayed()
     }
 
+    @Test
+    fun userListScreen_dialogDisplayed() {
+        mockViewModel = mock {
+            on { uiState } doReturn MutableStateFlow(UserListUiState(
+                users = listOf(
+                    generateUserPresentationModel("Mike"),
+                    generateUserPresentationModel("Steve")
+                ),
+                focusedUser = generateUserPresentationModel("Mike"),
+                showUnfollowDialog = true
+            ))
+        }
+
+        composeTestRule.setContent {
+            UserListScreen(
+                viewModel = mockViewModel
+            )
+        }
+
+        //We expect to see the user list and header. Mike and Steve should be displayed.
+        composeTestRule.onNodeWithTag("SOHeader").assertIsDisplayed()
+        composeTestRule.onNodeWithTag("userList").assertIsDisplayed()
+        composeTestRule.onNodeWithTag("unfollowDialog").assertIsDisplayed()
+    }
+
 }

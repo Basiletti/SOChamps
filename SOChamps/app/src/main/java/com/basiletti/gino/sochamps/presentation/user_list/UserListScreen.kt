@@ -53,6 +53,7 @@ fun UserListScreen(
 
     if (uiState.showUnfollowDialog) {
         SOAlertDialog(
+            modifier = Modifier.testTag("unfollowDialog"),
             onConfirmation = viewModel::onUnfollowConfirmed,
             onDismissRequest = viewModel::hideDialog,
             dialogTitle = stringResource(R.string.unfollow_user),
@@ -110,7 +111,7 @@ fun UserListContent(
             else -> {
                 UserList(
                     users = uiState.users,
-                    onFollowClicked = viewModel::onFollowClicked
+                    onFollowClicked = viewModel::onFollowButtonClicked
                 )
             }
         }

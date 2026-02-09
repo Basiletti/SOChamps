@@ -20,7 +20,6 @@ class UserListViewModel @Inject constructor(
     private val getSOUsersUseCase: GetSOUsersUseCase,
     private val updateFollowUseCase: UpdateFollowUseCase,
 ): ViewModel() {
-
     private val _uiState = MutableStateFlow(UserListUiState())
     val uiState: StateFlow<UserListUiState> = _uiState
 
@@ -74,7 +73,7 @@ class UserListViewModel @Inject constructor(
         )
     }
 
-    fun onFollowClicked(user: User) {
+    fun onFollowButtonClicked(user: User) {
         if (user.isFollowing == true) {
             _uiState.value = _uiState.value.copy(
                 showUnfollowDialog = true,

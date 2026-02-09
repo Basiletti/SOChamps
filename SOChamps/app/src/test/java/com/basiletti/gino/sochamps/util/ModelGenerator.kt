@@ -4,7 +4,10 @@ import com.basiletti.gino.sochamps.data.remote.dto.BadgeCountsDto
 import com.basiletti.gino.sochamps.data.remote.dto.UserDto
 import com.basiletti.gino.sochamps.domain.model.User
 
-fun generateUserPresentationModel(displayName: String): User {
+fun generateUserPresentationModel(
+    displayName: String,
+    isFollowing: Boolean? = null,
+): User {
     return User(
         id = 22656,
         name = displayName,
@@ -13,6 +16,7 @@ fun generateUserPresentationModel(displayName: String): User {
         bronzeBadges = 100,
         silverBadges = 80,
         goldBadges = 50,
+        isFollowing = isFollowing
     )
 }
 
